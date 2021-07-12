@@ -2,7 +2,23 @@ import merge from "deepmerge";
 import * as shvl from "shvl";
 import localforage from "localforage";
 import _ from "lodash";
-
+/**
+ * 
+ * @param {Object} options : {
+ * key?: string;
+ * paths?: string[];
+ * reducer?: (state: State, paths: string[]) => object;
+ * subscriber?: (
+ *   store: Store<State>
+ *   ) => (handler: (mutation: any, state: State) => void) => void;
+ * filter?: (mutation: MutationPayload) => boolean;
+ * arrayMerger?: (state: any[], saved: any[]) => any;
+ * rehydrated?: (store: Store<State>) => void;
+ * fetchBeforeUse?: boolean;
+ * overwrite?: boolean;
+ * }
+ * @returns function
+ */
 export default function (options) {
   options = options || {};
 
@@ -100,6 +116,8 @@ export default function (options) {
       );
       (options.rehydrated || function () {})(store);
     }
+
+    prevState = savedState;
 
     (options.subscriber || subscriber)(store)(async function (mutation, state) {
       if ((options.filter || filter)(mutation)) {

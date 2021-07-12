@@ -1,7 +1,7 @@
 {
   "name": "vuex-persist-indexeddb",
   "description": "Persist and rehydrate your Vuex state between page reloads.",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "license": "MIT",
   "author": "sunhuaixing <sunhuaixing@gmail.com> ",
   "keywords": [
@@ -10,7 +10,7 @@
     "plugin"
   ],
   "homepage": "https://github.com/kaodigua/vuex-persist-indexeddb#readme",
-  "repository": "robinvdvleuten/vuex-persist-indexeddb",
+  "repository": "kaodigua/vuex-persist-indexeddb",
   "bugs": {
     "url": "https://github.com/kaodigua/vuex-persist-indexeddb/issues"
   },
