@@ -1,7 +1,9 @@
 import merge from "deepmerge";
 import * as shvl from "shvl";
 import localforage from "localforage";
-import _ from "lodash";
+import cloneDeep from "lodash/cloneDeep";
+import differenceWith from "lodash/differenceWith";
+import isEqual from "lodash/isEqual";
 /**
  * 
  * @param {Object} options : {
@@ -54,12 +56,12 @@ export default function (options) {
   }
 
   function setState(state, storage) {
-    let nextState = _.cloneDeep(state);
+    let nextState = cloneDeep(state);
     const preStates = getSubObjects(prevState);
     const states = getSubObjects(state);
 
-    const preDiffNewArr = _.differenceWith(preStates, states, _.isEqual);
-    const newDiffPre = _.differenceWith(states, preStates, _.isEqual);
+    const preDiffNewArr = differenceWith(preStates, states, isEqual);
+    const newDiffPre = differenceWith(states, preStates, isEqual);
     const promises1 = preDiffNewArr.map((item) => {
       return state[item.key]
         ? storage.setItem(item.key, state[item.key])
