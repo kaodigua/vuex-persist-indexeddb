@@ -76,11 +76,15 @@ export default function (options) {
   }
 
   function reducer(state, paths) {
+    const rawState = typeof toRaw === "function"
+      ? toRaw(state)
+      : state
+
     return Array.isArray(paths)
       ? paths.reduce(function (substate, path) {
-          return shvl.set(substate, path, shvl.get(state, path));
-        }, {})
-      : state;
+        return shvl.set(substate, path, shvl.get(rawState, path));
+      }, {})
+      : rawState;
   }
 
   function subscriber(store) {
